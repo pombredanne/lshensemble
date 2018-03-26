@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func randomSignature(size int, seed int64) Signature {
+func randomSignature(size int, seed int64) []uint64 {
 	r := rand.New(rand.NewSource(seed))
-	sig := make(Signature, size)
+	sig := make([]uint64, size)
 	for i := range sig {
 		sig[i] = uint64(r.Int63())
 	}
@@ -48,7 +48,7 @@ func Test_LshForest(t *testing.T) {
 		}
 	}
 
-	keys := make(chan string)
+	keys := make(chan interface{})
 	done := make(chan struct{})
 	defer close(done)
 	go func() {
